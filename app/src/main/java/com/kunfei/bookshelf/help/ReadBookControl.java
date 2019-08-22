@@ -64,6 +64,7 @@ public class ReadBookControl {
     private int tipPaddingRight;
     private int tipPaddingBottom;
     private float textLetterSpacing;
+    private boolean canSelectText;
 
     private SharedPreferences preferences;
 
@@ -120,7 +121,7 @@ public class ReadBookControl {
         this.screenDirection = preferences.getInt("screenDirection", 0);
         this.navBarColor = preferences.getInt("navBarColorInt", 0);
         this.textLetterSpacing = preferences.getFloat("textLetterSpacing", 0);
-
+        this.canSelectText = preferences.getBoolean("canSelectText", false);
         initTextDrawableIndex();
     }
 
@@ -567,6 +568,16 @@ public class ReadBookControl {
                 .apply();
     }
 
+    public Boolean getToLh() {
+        return preferences.getBoolean("toLh", false);
+    }
+
+    public void setToLh(Boolean toLh) {
+        preferences.edit()
+                .putBoolean("toLh", toLh)
+                .apply();
+    }
+
     public Boolean getHideNavigationBar() {
         return hideNavigationBar;
     }
@@ -670,6 +681,17 @@ public class ReadBookControl {
                 .apply();
     }
 
+    public boolean isCanSelectText() {
+        return canSelectText;
+    }
+
+    public void setCanSelectText(boolean canSelectText) {
+        this.canSelectText = canSelectText;
+        preferences.edit()
+                .putBoolean("canSelectText", canSelectText)
+                .apply();
+    }
+
     public int getTipPaddingTop() {
         return tipPaddingTop;
     }
@@ -704,9 +726,6 @@ public class ReadBookControl {
     }
 
     public int getPageMode() {
-        if (MApplication.isEInkMode) {
-            return 4;
-        }
         return pageMode;
     }
 

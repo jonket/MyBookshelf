@@ -4,6 +4,10 @@ import android.graphics.PorterDuff;
 import android.os.Environment;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.kunfei.basemvplib.impl.IPresenter;
 import com.kunfei.bookshelf.R;
 import com.kunfei.bookshelf.help.BookshelfHelp;
@@ -24,9 +28,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -208,6 +209,9 @@ public class FileCategoryFragment extends BaseFileFragment {
         @Override
         public boolean accept(File pathname) {
             if (pathname.getName().startsWith(".")) {
+                return false;
+            }
+            if (pathname.list() == null) {
                 return false;
             }
             //文件夹内部数量为0
